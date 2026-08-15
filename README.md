@@ -23,3 +23,14 @@ docker run --rm -p 8000:80 \
 The original deployment exposed only its HTTP application port through
 Runpod's HTTPS proxy. The pod itself has been terminated, so this repository is
 the durable source for the application.
+
+## How it was created
+
+This page was created from a simple prompt: build a developer-first “hello”
+application and deploy it on a secure Runpod pod. Follow-up prompting refined
+the cloud label, security settings, deployment cost, and repository packaging.
+
+The Runpod MCP server handled infrastructure operations directly: checking GPU
+availability and pricing, launching the Secure Cloud pod, inspecting its status
+and logs, verifying the deployment, and terminating the pod afterward. No API
+keys or other credentials are stored in this repository.
