@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#090b10" />
+  <title>Hello, Runpod — Developer Runtime</title>
+  <style>
+    :root{--bg:#090b10;--panel:#11151d;--line:#252b38;--text:#f4f7fb;--muted:#8f9bad;--lime:#b8ff5a;--cyan:#55dfff;--violet:#a78bfa}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(circle at 75% 10%,#1b2440 0,transparent 32rem),radial-gradient(circle at 10% 90%,#14271e 0,transparent 28rem),var(--bg);font:15px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 70%)}
+    main{width:min(1120px,calc(100% - 36px));margin:auto;padding:28px 0 64px;position:relative}
+    nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:70px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em}.mark{width:28px;height:28px;border:1px solid #485168;border-radius:8px;display:grid;place-items:center;color:var(--lime);box-shadow:inset 0 0 14px #b8ff5a18}.status{display:flex;align-items:center;gap:9px;color:#bdc6d4;font-size:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 16px var(--lime);animation:pulse 2s infinite}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:70px}.eyebrow{color:var(--cyan);text-transform:uppercase;letter-spacing:.15em;font-size:12px;margin:0 0 18px}.eyebrow:before{content:"// ";color:#596579}h1{font:800 clamp(48px,8vw,92px)/.92 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.075em;margin:0;max-width:770px}h1 span{color:transparent;-webkit-text-stroke:1px #78859b}.lead{font:18px/1.7 ui-sans-serif,system-ui,sans-serif;color:#aab4c4;max-width:610px;margin:28px 0 32px}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{border:1px solid var(--line);border-radius:10px;padding:11px 16px;color:var(--text);text-decoration:none;background:#121722;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:#617089}.btn.primary{background:var(--lime);color:#10150b;border-color:var(--lime);font-weight:800}
+    .terminal{border:1px solid #303748;border-radius:16px;background:#0b0e14cc;box-shadow:0 25px 70px #0009,0 0 0 1px #ffffff08 inset;overflow:hidden;transform:rotate(1.2deg)}.terminal-head{padding:12px 15px;border-bottom:1px solid var(--line);display:flex;gap:7px;align-items:center;color:#788499;font-size:11px}.terminal-head i{width:9px;height:9px;border-radius:50%;background:#ff6b6b}.terminal-head i:nth-child(2){background:#ffd166}.terminal-head i:nth-child(3){background:#72e59a}.terminal-head span{margin-left:auto}.terminal pre{margin:0;padding:24px;min-height:300px;white-space:pre-wrap;color:#d9e0ea;line-height:1.9}.prompt{color:var(--lime)}.key{color:var(--cyan)}.string{color:#d7a9ff}.cursor{display:inline-block;width:8px;height:16px;background:var(--lime);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+    .grid{margin-top:90px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(145deg,#141923cc,#0e1219cc);border:1px solid var(--line);border-radius:14px;padding:22px;min-height:148px}.card small{display:block;text-transform:uppercase;letter-spacing:.12em;color:#778397;font-size:10px}.card strong{display:block;font:700 28px/1.2 ui-sans-serif,system-ui,sans-serif;margin:17px 0 4px}.card p{margin:0;color:var(--muted);font-size:12px}.card.accent{border-color:#b8ff5a55;box-shadow:inset 0 0 35px #b8ff5a08}.footer{display:flex;justify-content:space-between;color:#637084;font-size:11px;margin-top:50px;padding-top:20px;border-top:1px solid var(--line)}
+    @keyframes pulse{50%{opacity:.4;transform:scale(.75)}}@keyframes blink{50%{opacity:0}}@media(max-width:780px){nav{margin-bottom:45px}.hero{grid-template-columns:1fr;gap:45px}.terminal{transform:none}.grid{grid-template-columns:1fr;margin-top:60px}h1{font-size:58px}.footer{display:block}.footer span{display:block;margin-top:6px}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main>
+    <nav><div class="brand"><span class="mark">λ</span> RUNPOD / HELLO</div><div class="status"><span class="dot"></span> SYSTEM ONLINE</div></nav>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">deployed at the speed of thought</p>
+        <h1>Hello,<br><span>developer.</span></h1>
+        <p class="lead">A tiny application running live on Runpod. No framework, no build step—just clean markup, sharp pixels, and a container doing exactly what it promised.</p>
+        <div class="actions"><a class="btn primary" href="#runtime">Inspect runtime →</a><a class="btn" href="https://docs.runpod.io/" target="_blank" rel="noreferrer">Read the docs ↗</a></div>
+      </div>
+      <div class="terminal" aria-label="Terminal output">
+        <div class="terminal-head"><i></i><i></i><i></i><span>runtime.log</span></div>
+        <pre><span class="prompt">$</span> curl /health
+{
+  <span class="key">"status"</span>: <span class="string">"ready"</span>,
+  <span class="key">"cloud"</span>: <span class="string">"secure"</span>,
+  <span class="key">"runtime"</span>: <span class="string">"runpod"</span>,
+  <span class="key">"message"</span>: <span class="string">"hello world"</span>
+}
+
+<span class="prompt">$</span> uptime <span id="uptime">00:00:00</span>
+<span class="prompt">$</span> <span class="cursor"></span></pre>
+      </div>
+    </section>
+    <section class="grid" id="runtime">
+      <article class="card accent"><small>Runtime status</small><strong style="color:var(--lime)">Operational</strong><p>Serving traffic over Runpod's secure HTTP proxy.</p></article>
+      <article class="card"><small>Stack</small><strong>Zero-dependency</strong><p>Static HTML + CSS + a few bytes of vanilla JavaScript.</p></article>
+      <article class="card"><small>Local time</small><strong id="clock">--:--:--</strong><p id="date">Synchronizing client runtime…</p></article>
+    </section>
+    <div class="footer"><span>Built for curious humans who ship.</span><span>HTTP 200 · RUNPOD · 2026</span></div>
+  </main>
+  <script>
+    const started=Date.now();
+    const pad=n=>String(n).padStart(2,'0');
+    setInterval(()=>{const d=new Date(),s=Math.floor((Date.now()-started)/1000);document.querySelector('#clock').textContent=d.toLocaleTimeString([], {hour12:false});document.querySelector('#date').textContent=d.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'});document.querySelector('#uptime').textContent=`${pad(s/3600|0)}:${pad(s/60%60|0)}:${pad(s%60)}`},1000);
+  </script>
+</body>
+</html>
