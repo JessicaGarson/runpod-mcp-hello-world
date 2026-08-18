@@ -1,54 +1,48 @@
-# Secure Runpod Hello
+# Secure RunPod Hello World
 
-A zero-dependency, developer-first hello page built for a Runpod Secure Cloud
-pod. The interface uses a terminal-inspired layout, responsive styling, and a
-small vanilla JavaScript runtime clock.
+A developer-focused Hello World application deployed on a RunPod Secure Cloud
+Pod. It uses a small nginx Alpine image, a responsive terminal-inspired page,
+and a JSON health endpoint.
+
+## Live deployment
+
+- Application: <https://si7x2rbbb49xcf-8080.proxy.runpod.net/>
+- Health: <https://si7x2rbbb49xcf-8080.proxy.runpod.net/status>
+- Pod ID: `si7x2rbbb49xcf`
+- Cloud: RunPod Secure Cloud
+- Port: `8080/http`
+
+The live Pod incurs usage charges until it is stopped or terminated.
 
 ## Run locally
 
 ```bash
-python3 -m http.server 8000
+docker build -t runpod-mcp-hello-world .
+docker run --rm -p 8080:8080 runpod-mcp-hello-world
 ```
 
-Then open <http://localhost:8000>.
-
-## Run in a container
+Open <http://localhost:8080>. Check the service with:
 
 ```bash
-docker run --rm -p 8000:80 \
-  -v "$PWD/index.html:/usr/share/nginx/html/index.html:ro" \
-  nginx:alpine
+curl http://localhost:8080/status
 ```
 
-The original deployment exposed only its HTTP application port through
-Runpod's HTTPS proxy. The pod itself has been terminated, so this repository is
-the durable source for the application.
+Expected response:
 
-## Runpod MCP server
-
-This project was deployed and managed with the official
-[Runpod MCP server](https://github.com/runpod/runpod-mcp). It gives compatible
-AI tools a structured interface for managing Runpod Pods, Serverless endpoints,
-templates, network volumes, registries, and related infrastructure.
-
-For this deployment, the MCP server was used to check Secure Cloud GPU
-availability and pricing, create the Pod, inspect its status and logs, and
-terminate it when the demo was complete. The application was exposed through
-Runpod's HTTPS proxy without storing a Runpod API key in this repository.
-
-See Runpod's [MCP server guide](https://docs.runpod.io/get-started/mcp-servers)
-for hosted and local setup options. The upstream project also provides a guided
-installer:
-
-```bash
-npx @runpod/mcp-server@latest add
+```json
+{"message":"Hello, World!","runtime":"RunPod Secure Cloud","status":"healthy"}
 ```
 
-## How it was created
+## Security
 
-This page was created from a simple prompt: build a developer-first “hello”
-application and deploy it on a secure Runpod pod. Follow-up prompting refined
-the cloud label, security settings, deployment cost, and repository packaging.
+The deployment uses RunPod Secure Cloud and exposes only the HTTP application
+port through RunPod's HTTPS proxy. nginx disables version tokens and returns a
+Content Security Policy, `X-Content-Type-Options`, `X-Frame-Options`, and a
+no-referrer policy. No credentials or RunPod API keys are stored in this repo.
 
-The MCP workflow kept infrastructure actions conversational and auditable while
-the application itself remained plain HTML, CSS, and JavaScript.
+## RunPod deployment
+
+The Pod was created through the official
+[RunPod MCP server](https://github.com/runpod/runpod-mcp) using the reusable
+template `7wht0klf7n`. The current Pod uses one NVIDIA RTX 2000 Ada Generation
+GPU and a 5 GB container disk.
